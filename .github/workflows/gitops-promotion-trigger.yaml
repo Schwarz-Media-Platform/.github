@@ -5,8 +5,15 @@ name: GitOps Promotion Forwarder
 
 on:
   workflow_call:
+    # Defining these here allows them to be mapped correctly
+    # when using 'inherit' or explicit passing.
     secrets:
-      inherit:
+      TEST_SECRET:
+        required: false
+      API_KEY:
+        required: false
+      GITOPS_PROMOTER_WEBHOOK_SECRET:
+        required: false
 jobs:
   forward-to-cloudbuild:
     runs-on: ubuntu-latest
