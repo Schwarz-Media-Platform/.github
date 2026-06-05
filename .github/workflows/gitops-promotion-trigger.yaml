@@ -6,7 +6,7 @@ name: GitOps Promotion Forwarder
 on:
   workflow_call:
     secrets:
-          inherit:
+      inherit:
 jobs:
   forward-to-cloudbuild:
     runs-on: ubuntu-latest
