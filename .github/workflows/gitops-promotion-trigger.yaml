@@ -30,7 +30,7 @@ jobs:
           SECRET_TEST: ${{ secrets.TEST_SECRET }}
         run: |
           echo "$SECRET_TEST something something"
-          if [ -z "${SECRET_TEST}" ]; then echo "::error::Something is off with secrets"; exit 1; fi
+          if [ -z "${SECRET_TEST}" ]; then echo "::error::Something is off with secrets"; exit 1; else echo "allgood" ; fi
           #if [ -z "${{ secrets.API_KEY }}" ]; then echo "::error::secret API_KEY missing"; exit 1; fi
           #if [ -z "${{ secrets.GITOPS_PROMOTER_WEBHOOK_SECRET }}" ]; then echo "::error::secret GITOPS_PROMOTER_WEBHOOK_SECRET missing"; exit 1; fi
           #curl -X POST -H "Content-type: application/json" "https://cloudbuild.googleapis.com/v1/projects/sit-smp-cicd-8xr1/triggers/gitops-promoter-trigger:webhook?key=${{ secrets.API_KEY }}&secret=${{ secrets.GITOPS_PROMOTER_WEBHOOK_SECRET }}&trigger=gitops-promoter-trigger&projectId=sit-smp-cicd-8xr1" \
