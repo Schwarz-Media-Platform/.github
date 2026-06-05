@@ -28,9 +28,9 @@ jobs:
             -d '{
               "branchName": "main",
               "substitutions": {
-                "pr_number": 13,
+                "pr_number": "13",
                 "repo_name": "${{ github.repository }}",
-                "target_name": "${{ steps.parse.outputs.target_env }}",
+                "target_env": "${{ steps.parse.outputs.target_env }}",
                 "target_version": ""
               }
             }'
