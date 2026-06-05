@@ -19,7 +19,6 @@ jobs:
 
       - name: Fire Cloud Build Webhook
         run: |
-          curl -X POST 
           curl -X POST -H "Content-type: application/json" "https://cloudbuild.googleapis.com/v1/projects/sit-smp-cicd-8xr1/triggers/gitops-promoter-trigger:webhook?key=${{ secrets.API_KEY }}&secret=${{ secrets.GITOPS_PROMOTER_WEBHOOK_SECRET }}&trigger=gitops-promoter-trigger&projectId=sit-smp-cicd-8xr1" \
             -H "Content-Type: application/json" \
             -d '{
