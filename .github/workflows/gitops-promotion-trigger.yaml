@@ -1,0 +1,36 @@
+# Needs secrets:
+# API Key: gcloud services api-keys get-key-string gitops-promoter-webhook-key --format="value(keyString)" --project sit-smp-cicd-8xr1
+# Secret: sit-smp-cicd-8xr1/gitops-promoter-webhook-secret
+name: GitOps Promotion Forwarder
+
+on:
+  workflow_call:
+    secrets:
+      API_KEY:
+        required: true
+      GITOPS_PROMOTER_WEBHOOK_SECRET:
+        required: true
+jobs:
+  forward-to-cloudbuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse Target Environment
+        id: parse
+        run: |
+          #ENV=$(echo "${{ github.event.comment.body }}" | awk '{print $2}')
+          ENV=stage
+          echo "target_env=$ENV" >> $GITHUB_OUTPUT
+
+      - name: Fire Cloud Build Webhook
+        run: |
+          curl -X POST -H "Content-type: application/json" "https://cloudbuild.googleapis.com/v1/projects/sit-smp-cicd-8xr1/triggers/gitops-promoter-trigger:webhook?key=${{ secrets.API_KEY }}&secret=${{ secrets.GITOPS_PROMOTER_WEBHOOK_SECRET }}&trigger=gitops-promoter-trigger&projectId=sit-smp-cicd-8xr1" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "branchName": "main",
+              "substitutions": {
+                "pr_number": "13",
+                "repo_name": "${{ github.repository }}",
+                "target_env": "${{ steps.parse.outputs.target_env }}",
+                "target_version": ""
+              }
+            }'

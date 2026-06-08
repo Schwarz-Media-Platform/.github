@@ -15,6 +15,8 @@ These items have been considered:
   - [ ] I have made corresponding changes to the documentation
   - [ ] My code follows the style guidelines of this project
   - [ ] I passed the CI or manual tests (if not integrated with CI).
+  - [ ] I know I can bump the version adding `MAJOR` or `MINOR` to the commit message.
+  - [ ] Ending the merge message in something like `(#123)`, where the `#123` is the PR reference, enables some GitOps quality of life features (this is normally the default merge message in github). 
 
 ## How Has This Been Tested?
 
