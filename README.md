@@ -26,7 +26,7 @@ jobs:
       (startsWith(github.event.comment.body, '/promote stage') || 
        startsWith(github.event.comment.body, '/promote prod'))
 
-    uses: Schwarz-Media-Platform/.github/.github/workflows/shared-promotion.yml@main
+    uses: Schwarz-Media-Platform/.github/.github/workflows/gitops-promotion-trigger.yml@master
     secrets:
       API_KEY: ${{ secrets.API_KEY }}
       GITOPS_PROMOTER_WEBHOOK_SECRET: ${{ secrets.GITOPS_PROMOTER_WEBHOOK_SECRET }}
